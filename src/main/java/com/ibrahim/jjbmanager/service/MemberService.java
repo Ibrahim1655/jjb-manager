@@ -13,7 +13,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public List<Member> getALlMembers(){
+    public List<Member> getAllMembers(){
         return memberRepository.findAll();
     }
     /*
@@ -26,7 +26,27 @@ public class MemberService {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Licencié non trouvé"));
     }
+
     public Member createMember(Member member){
         return memberRepository.save(member);
     }
+
+    public Member updateMember(Long id, Member updatedMember){
+        Member existing = getMemberByID(id);
+        existing.setFirstName(updatedMember.getFirstName());
+        existing.setLastName(updatedMember.getLastName());
+        existing.setBirthDate(updatedMember.getBirthDate());
+        existing.setWeight(updatedMember.getWeight());
+        existing.setRegistrationDate(updatedMember.getRegistrationDate());
+        existing.setActive(updatedMember.getActive());
+        existing.setBelt(updatedMember.getBelt());
+        return memberRepository.save(existing);
+    }
+
+    public void deleteMember(Long id){
+        getMemberByID(id);
+        memberRepository.deleteById(id);
+    }
+
+
 }
