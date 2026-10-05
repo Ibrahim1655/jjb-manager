@@ -17,4 +17,7 @@ export class UsersService {
     newUser.password = await bcrypt.hash(newUser.password, 10);
     return await this.userRepository.save(newUser);
   }
+  async findOneByeMail(email: string): Promise<User | null> {
+    return this.userRepository.findOneBy({ email });
+  }
 }

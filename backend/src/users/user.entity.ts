@@ -16,7 +16,6 @@ export class User {
   email: string;
 
   //Pour que le hash du mot de passe ne soit pas envoyé dans le json, fonctionne avec l'import dans le main.ts
-
   @Exclude()
   @Column()
   password: string;
