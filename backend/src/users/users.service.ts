@@ -20,4 +20,8 @@ export class UsersService {
   async findOneByeMail(email: string): Promise<User | null> {
     return this.userRepository.findOneBy({ email });
   }
+
+  async findOneByID(id: number): Promise<User | null> {
+    return this.userRepository.findOneBy({ id });
+  }
 }

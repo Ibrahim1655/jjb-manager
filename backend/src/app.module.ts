@@ -7,7 +7,9 @@ import { User } from './users/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { RolesGuard } from './common/guards/role.guard';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from '@nestjs/passport';
+import { LicenciesModule } from './licencies/licencies.module';
+import { Licencies } from './licencies/licencie.entity';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -19,17 +21,18 @@ import { AuthGuard } from '@nestjs/passport';
       username: 'root',
       password: '',
       database: 'jjbmanager',
-      entities: [User],
+      entities: [User, Licencies],
       synchronize: true,
     }),
     AuthModule,
+    LicenciesModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
     {
       provide: APP_GUARD,
-      useClass: AuthGuard('jwt'),
+      useClass: JwtAuthGuard,
     },
     {
       provide: APP_GUARD,

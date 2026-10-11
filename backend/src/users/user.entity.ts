@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { Role } from '../common/enums/role.enum';
+import { Licencies } from '../licencies/licencie.entity';
 
 @Entity()
 export class User {
@@ -27,4 +28,7 @@ export class User {
     default: Role.LICENCIE,
   })
   role: Role;
+
+  @OneToOne(() => Licencies, (licencie) => licencie.user)
+  licencie: Licencies;
 }
