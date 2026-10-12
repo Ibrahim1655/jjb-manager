@@ -13,6 +13,10 @@ export class LicenciesService {
     private licencieRepository: Repository<Licencies>,
   ) {}
 
+  async findAll(): Promise<Licencies[]> {
+    return await this.licencieRepository.find();
+  }
+
   async createLicencie(createLicencieDto: CreateLicencieDto) {
     const user = await this.userService.findOneByID(createLicencieDto.userId);
     if (!user) throw new NotFoundException();
